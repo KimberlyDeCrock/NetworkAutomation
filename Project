@@ -1,0 +1,52 @@
+#!/bin/bash
+import wmi, win32com.client, keyboard, sys, os, getpass, datetime
+
+# Menu tonen
+function show_menu(){
+date
+echo "Menu"
+echo "---------------------------"
+echo "1. Server registreren"
+echo "2. Vagrant box beheer"
+echo "3. Remote execution van commando's/scripts op servers"
+echo "4. Monitoring van de remote hosts"
+echo "5. Enkele predefined architecturen opzetten in vagrant"
+echo "7. Exit"
+}
+
+#Server registreren
+
+#IP en naam toekennen en lokaal opslaan
+import databaseconfig as cfg
+class host:
+    def __init__(self, server, ip):
+        self.server = server
+        self.ip = ip
+    def __str__(self):
+        return self.server
+
+class hostFileLezen:
+    def __init__(self, bestandsnaam):
+        self.filename = bestandsnaam
+    def leesFile(self):
+        # print('in loop')
+        data = []
+        try:
+            # print(filename)
+            with open(self.filename, "r") as f:
+                print('reading file')
+                data = f.readlines()
+                print(data)
+                hostlist = []
+                for i in data:
+                    info = i.split(';')
+                    nhost = host(info[0].strip(), info[1].strip())
+                    hostlist.append(nhost)
+                return hostlist
+        except:
+            return ['failed', data]
+
+class wmiConnectie:
+    def __init__(self, host, passw):
+        self.host = host
+        self.passw = passw
