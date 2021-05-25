@@ -43,6 +43,7 @@ optie = int(input('Wat wil je doen?'))
                       return hostlist
               except:
                   return ['failed', data]
+	show_menu()
    elif optie == 2:
    #Uitwerken optie 3
    elif optie == 3:
@@ -124,6 +125,7 @@ optie = int(input('Wat wil je doen?'))
            disk_check
            process_check
            }
+	   show_menu()
    elif optie == 5:
    elif optie == 6:
       
