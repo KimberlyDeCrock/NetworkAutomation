@@ -14,6 +14,7 @@ echo "6. Exit"
 }
 
 optie = int(input('Wat wil je doen?'))
+   #Ip adres en servernaam opslaan
    if optie == 1:
        class host:
           def __init__(self, server, ip):
@@ -24,7 +25,7 @@ optie = int(input('Wat wil je doen?'))
 
        class hostFileLezen:
           def __init__(self):
-              self.filename = servers.config
+              self.filename = "servers.config"
           def leesFile(self):
               data = []
               try:
@@ -43,7 +44,56 @@ optie = int(input('Wat wil je doen?'))
               except:
                   return ['failed', data]
    elif optie == 2:
+         def menu():
+         print('1. Netmiko\n2. Script uitvoeren op remote server\n3. Terug naar menu')
+         optie = int(input('Geef uw keuze in'))
+         #Netmiko
+         if optie == 1:
+               from netmiko import ConnectHandler
+               params = {
+                  'device_type': 'linux',
+                  'ip': '192.168.33.10',
+                  'username': 'user',
+                  'password': 'password',
+                  'secret': 'password',
+                  'port': '22'
+                  }
+                myssh = ConnectHandler(**params)
+                output_pwd = myssh.send_command("pwd")
+                print(output_pwd)
+         #Script uitvoeren op remote server
+         elif optie == 2:
+                 server_ip=$1
+                 file_to_execute=$2
+
+                 if [ -n "$1" ]; then
+                     echo "Connectie maken met server $1"
+                 else
+                     echo "Geef een server IP!"
+                     exit 1
+                 fi
+
+                 if [ -n "$2" ]; then
+                     echo "Script uitvoeren $2"
+                 else
+                     echo "Geef een bestand om uit te voeren!"
+                     exit 1
+                 fi
+                 shift
+                 shift
+                 ssh ${server_ip} "bash -s" -- < ${file_to_execute} $*
+         #Terug naar hoofdmenu        
+         elif optie == 3:
+                 show_menu()
+         #Terug naar submenu
+         else:
+             print('Geef een geldig nummer in\n')
+             menu()
+   elif optie == 3:
+   elif optie == 4:
+   elif optie == 5:
+   elif optie == 6:
       
    else:
         print('please give a valid number\n')
-        menu()
+        show_menu()
