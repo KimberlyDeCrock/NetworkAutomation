@@ -10,5 +10,40 @@ echo "2. Vagrant box beheer"
 echo "3. Remote execution van commando's/scripts op servers"
 echo "4. Monitoring van de remote hosts"
 echo "5. Enkele predefined architecturen opzetten in vagrant"
-echo "7. Exit"
+echo "6. Exit"
 }
+
+optie = int(input('Wat wil je doen?'))
+   if optie == 1:
+       class host:
+          def __init__(self, server, ip):
+             self.server = server
+             self.ip = ip
+          def __str__(self):
+             return self.server
+
+       class hostFileLezen:
+          def __init__(self):
+              self.filename = servers.config
+          def leesFile(self):
+              data = []
+              try:
+                  # print(filename)
+                  with open(self.filename, "r") as f:
+                      print('reading file')
+                      data = f.readlines()
+                      print(data)
+                      hostlist = []
+                      for i in data:
+                          info = i.split(';')
+                          nhost = host(info[0].strip(), info[1].strip())
+                          hostlist.append(nhost)
+
+                      return hostlist
+              except:
+                  return ['failed', data]
+   elif optie == 2:
+      
+   else:
+        print('please give a valid number\n')
+        menu()
