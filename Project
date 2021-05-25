@@ -44,6 +44,8 @@ optie = int(input('Wat wil je doen?'))
               except:
                   return ['failed', data]
    elif optie == 2:
+   #Uitwerken optie 3
+   elif optie == 3:
          def menu():
          print('1. Netmiko\n2. Script uitvoeren op remote server\n3. Terug naar menu')
          optie = int(input('Geef uw keuze in'))
@@ -89,8 +91,39 @@ optie = int(input('Wat wil je doen?'))
          else:
              print('Geef een geldig nummer in\n')
              menu()
-   elif optie == 3:
+   #Monitoring van de remote hosts
    elif optie == 4:
+           server_name=$(hostname)
+           function ram_check() {
+             echo "#######"
+	          echo "The current memory usage on ${server_name} is: "
+	          free -h
+	          echo "#######"
+           }
+           function cpu_check() {
+             echo "#######"
+	          echo "The current CPU load on ${server_name} is: "
+	          uptime
+             echo "#######"
+           }
+           function disk_check() {
+             echo "#######"
+	          echo "The current disk usage on ${server_name} is: "
+	          df -h
+             echo "#######"
+           }
+           function process_check() {
+           echo "#######"
+           echo "The current active tasks on ${server_name} is: "
+           tasklist
+           echo "#######"
+           }
+           function all_checks() {
+           ram_check
+           cpu_check
+           disk_check
+           process_check
+           }
    elif optie == 5:
    elif optie == 6:
       
