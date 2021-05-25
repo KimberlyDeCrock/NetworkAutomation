@@ -130,5 +130,5 @@ optie = int(input('Wat wil je doen?'))
    elif optie == 6:
       
    else:
-        print('please give a valid number\n')
+        print('Geef een geldig nummer in.\n')
         show_menu()
